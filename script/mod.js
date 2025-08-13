@@ -8,8 +8,8 @@
 const style = `
 :host {
   display: block;
-  width: 300px;
-  height: 150px;
+  width: 100vw;
+  height: 100vh;
   background-color: #ddd;
 }
 iframe {
@@ -83,13 +83,12 @@ async function render({ src: fileSrc }) {
         `<script src="viewer.js"></script>
         <script>
           PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");
-          PDFViewerApplication.pdfViewer.currentPageNumber = 2;
         </script>`,
       );
 
     const blob = new Blob([html], { type: "text/html" });
     iframe.src = URL.createObjectURL(blob);
-
+    iframe.contentWindow.PDFViewerApplication.page = 2;
     // show download link when loading error occurs
     iframe.addEventListener("load", () => {
       iframe.contentWindow?.addEventListener("unhandledrejection", () => {
