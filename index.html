@@ -16,7 +16,7 @@
 
   // The workerSrc property shall be specified.
   pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
-  var hash = url.hash;
+  var hash = window.location.hash;
   var pdfDoc = null,
       pageNum = hash != null && hash.indexOf(('page=') == 1 ? hash.split('page=')[1] : 1,
       pageRendering = false,
