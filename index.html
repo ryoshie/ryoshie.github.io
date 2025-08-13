@@ -1,18 +1,3 @@
-<!--html>
-  <style>
-    :host {
-      display: block;
-      width: 100vw !important;
-      height: 100vh !important;
-      background-color: #ddd;
-    }
-  </style>
-  <script src="script/mod.js" type="module"></script>
-  <body>
-    <embed-pdf src="files/file.pdf#2"></embed-pdf>
-  </body>
-</html-->
-
 <html dir="ltr" mozdisallowselectionprint>
   <head>
     <meta charset="utf-8">
@@ -20,23 +5,21 @@
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
   </head>
-
-
-    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
-
+<script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 <script type="module">
   // If absolute URL from the remote server is provided, configure the CORS
   // header on that server.
-  var url = 'https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf';
+  var url = 'https://drive.google.com/file/d/1GBvNOPMBuETuSozIDPT7CM6T5d-OCfDM/preview';
 
   // Loaded via <script> tag, create shortcut to access PDF.js exports.
   var { pdfjsLib } = globalThis;
 
   // The workerSrc property shall be specified.
   pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
-
+  var hash = url.hash;
+  var pageNum = 1; 
+  if( hash != null && hash.indexOf(('page=') == 1) pageNum = hash.split('page=')[1];
   var pdfDoc = null,
-      pageNum = 1,
       pageRendering = false,
       pageNumPending = null,
       scale = 0.8,
@@ -124,11 +107,7 @@
     renderPage(pageNum);
   });
 </script>
-  <body tabindex="0">
-      <h1>PDF.js Previous/Next example</h1>
-      
-      <p>Please use <a href="https://mozilla.github.io/pdf.js/getting_started/#download"><i>official releases</i></a> in production environments.</p>
-      
+  <body>
       <div>
         <button id="prev">Previous</button>
         <button id="next">Next</button>
