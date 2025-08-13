@@ -1,9 +1,14 @@
 <html>
+  <style>
+    :host {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background-color: #ddd;
+    }
+  </style>
+  <script src="script/mod.js" type="module"></script>
   <body>
-    <script src="script/mod.js" type="module"></script>
-    <script>
-      PDFViewerApplication.pdfViewer.currentPageNumber = 5;
-    </script>
     <embed-pdf src="https://drive.google.com/file/d/1GBvNOPMBuETuSozIDPT7CM6T5d-OCfDM/preview"></embed-pdf>
   </body>
 </html>
