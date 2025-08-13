@@ -81,7 +81,10 @@ async function render({ src: fileSrc }) {
         '<script src="viewer.js"></script>',
         // Tells pdf.js which file to load. See also https://github.com/ayame113/embed-pdf-element/issues/1 .
         `<script src="viewer.js"></script>
-        <script>PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");</script>`,
+        <script>
+          PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");
+          PDFViewerApplication.pdfViewer.currentPageNumber = 2;
+        </script>`,
       );
 
     const blob = new Blob([html], { type: "text/html" });
