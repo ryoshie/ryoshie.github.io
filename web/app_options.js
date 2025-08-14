@@ -527,13 +527,13 @@ const defaultOptions = {
     kind: OptionKind.WORKER,
   },
 };
+const PDF_URL =
+  "https://relax-job.com/contents_list/wp-content/uploads/rejob_mediaguide_a.pdf";
 if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
   defaultOptions.defaultUrl = {
     /** @type {string} */
     value:
-      typeof PDFJSDev !== "undefined" && PDFJSDev.test("CHROME")
-        ? ""
-        : PDF_URL, // rejob
+      typeof PDFJSDev !== "undefined" && PDFJSDev.test("CHROME") ? "" : PDF_URL, // rejob
     kind: OptionKind.VIEWER,
   };
   defaultOptions.sandboxBundleSrc = {
