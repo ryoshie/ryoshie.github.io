@@ -1,10 +1,24 @@
 <html>
-  <body>
-      <iframe
-        src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf"
-        width="100%"
-        height="100%"
-        style="border: none;">
-      </iframe>
-  </body>
+  <style>
+.responsive-iframe {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio, adjust as needed */
+  height: 0;
+}
+
+.responsive-iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
+
+<div class="responsive-iframe">
+  <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf" allowfullscreen></iframe>
+</div>
+
 </html>
