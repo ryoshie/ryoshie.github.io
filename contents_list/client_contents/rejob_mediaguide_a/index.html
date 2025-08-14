@@ -1,23 +1,21 @@
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--#if GENERIC || CHROME-->
+    <meta name="google" content="notranslate">
+<!--#endif-->
+    <title>PDF.js viewer</title>
+  </head>
   <style>
-.responsive-iframe {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
-
-.responsive-iframe iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
 </style>
-
-<div class="responsive-iframe">
-  <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf" allowfullscreen></iframe>
-</div>
-
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf" allowfullscreen></iframe>
 </html>
