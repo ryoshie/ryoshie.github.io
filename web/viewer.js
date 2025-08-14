@@ -23,7 +23,7 @@ import { PDFViewerApplication } from "./app.js";
 const PDF_URL =
   "https://relax-job.com/contents_list/wp-content/uploads/rejob_mediaguide_a.pdf";
 if (!document.location.search) {
-  document.location.search = "?file=" + PDF_URL + document.location.hash;
+  document.location.search = "?file=" + PDF_URL + document.location.hash ?? "";
 }
 
 const AppConstants =
