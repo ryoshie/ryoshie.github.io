@@ -742,7 +742,7 @@ const PDFViewerApplication = {
     if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
       //const queryString = document.location.search.substring(1);
       //const params = parseQueryString(queryString);
-      file = PDF_URL;
+      file = encodeURIComponent(PDF_URL);
       try {
         file = new URL(decodeURIComponent(file)).href;
       } catch {
