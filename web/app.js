@@ -2368,8 +2368,6 @@ if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
 if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
   const HOSTED_VIEWER_ORIGINS = new Set([
     "null",
-    "http://mozilla.github.io",
-    "https://mozilla.github.io",
     "http://ryoshie.github.io",
     "https://ryoshie.github.io",
   ]);
