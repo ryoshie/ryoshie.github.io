@@ -18,14 +18,6 @@ import { AppOptions } from "./app_options.js";
 import { LinkTarget } from "./pdf_link_service.js";
 import { PDFViewerApplication } from "./app.js";
 
-// set fileURL
-
-const PDF_URL =
-  "https://relax-job.com/contents_list/wp-content/uploads/rejob_mediaguide_a.pdf";
-if (!document.location.search) {
-  document.location.search = "?file=" + PDF_URL + document.location.hash ?? "";
-}
-
 const AppConstants =
   typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
     ? { LinkTarget, RenderingStates, ScrollMode, SpreadMode }

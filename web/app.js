@@ -99,6 +99,9 @@ import { ViewHistory } from "./view_history.js";
 
 const FORCE_PAGES_LOADED_TIMEOUT = 10000; // ms
 
+const PDF_URL =
+  "https://relax-job.com/contents_list/wp-content/uploads/rejob_mediaguide_a.pdf";
+
 const ViewOnLoad = {
   UNKNOWN: -1,
   PREVIOUS: 0, // Default value.
@@ -737,9 +740,9 @@ const PDFViewerApplication = {
     const { appConfig, eventBus } = this;
     let file;
     if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
-      const queryString = document.location.search.substring(1);
-      const params = parseQueryString(queryString);
-      file = params.get("file") ?? AppOptions.get("defaultUrl");
+      //const queryString = document.location.search.substring(1);
+      //const params = parseQueryString(queryString);
+      file = PDF_URL;
       try {
         file = new URL(decodeURIComponent(file)).href;
       } catch {
