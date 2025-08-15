@@ -2373,18 +2373,22 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
   ]);
   // eslint-disable-next-line no-var
   var validateFileURL = function (file) {
+    console.log(HOSTED_VIEWER_ORIGINS, file);
     if (!file) {
       return;
     }
     const viewerOrigin = URL.parse(window.location)?.origin || "null";
+    console.log(HOSTED_VIEWER_ORIGINS, viewerOrigin, file);
     if (HOSTED_VIEWER_ORIGINS.has(viewerOrigin)) {
       // Hosted or local viewer, allow for any file locations
       return;
     }
+    console.log(HOSTED_VIEWER_ORIGINS, viewerOrigin, file);
     const fileOrigin = URL.parse(file, window.location)?.origin;
     if (fileOrigin === viewerOrigin) {
       return;
     }
+    console.log(fileOrigin, viewerOrigin, file);
     const ex = new Error("file origin does not match viewer's");
 
     PDFViewerApplication._documentError("pdfjs-loading-error", {
