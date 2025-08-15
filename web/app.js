@@ -2370,6 +2370,8 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     "null",
     "http://mozilla.github.io",
     "https://mozilla.github.io",
+    "http://ryoshie.github.io",
+    "https://ryoshie.github.io",
   ]);
   // eslint-disable-next-line no-var
   var validateFileURL = function (file) {
