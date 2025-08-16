@@ -1,8 +1,8 @@
 const style = `
 :host {
   display: block;
-  width: 300px;
-  height: 150px;
+  width: 100vw;
+  height: 100vh;
   background-color: #ddd;
 }
 iframe {
