@@ -47,12 +47,6 @@ async function render({ src: fileSrc }) {
     throw new Error("plese set `src` attribute to <embed-pdf> element.");
   }
 
-  if (globalThis.navigator?.pdfViewerEnabled) {
-    // use native iframe support
-    iframe.src = fileSrc;
-    return iframe;
-  }
-
   try {
     const fileUrl = new URL(fileSrc, location.href);
 
