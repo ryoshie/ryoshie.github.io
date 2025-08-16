@@ -1,15 +1,8 @@
-// @ts-check
-
-/// <reference no-default-lib="true"/>
-/// <reference lib="esnext" />
-/// <reference lib="dom" />
-/// <reference lib="dom.iterable" />
-
 const style = `
 :host {
   display: block;
-  width: 100vw;
-  height: 100vh;
+  width: 300px;
+  height: 150px;
   background-color: #ddd;
 }
 iframe {
@@ -36,7 +29,7 @@ iframe {
   background-color: dodgerblue;
 }
 .download-link a::after {
-  content: "ðŸ’¾";
+  content: "💾";
   font-size: 1.2em;
   mergin: 0.2em;
   filter: brightness(2);
@@ -66,7 +59,7 @@ async function render({ src: fileSrc }) {
     // cache pdfjs content
     viewerHtmlCache[EmbedPdf.viewerUrl] ??= (async () => {
       const res = await fetch(EmbedPdf.viewerUrl);
-      return await res.text();
+      return res.text();
     })();
     const text = await viewerHtmlCache[EmbedPdf.viewerUrl];
 
@@ -74,22 +67,17 @@ async function render({ src: fileSrc }) {
     const html = text
       .replace(
         '<meta charset="utf-8">',
-        // Sets the base path for assets loaded with relative paths from within viewer.html.
         `<meta charset="utf-8"><base href="${EmbedPdf.viewerUrl}">`,
       )
       .replace(
         '<script src="viewer.js"></script>',
-        // Tells pdf.js which file to load. See also https://github.com/ayame113/embed-pdf-element/issues/1 .
         `<script src="viewer.js"></script>
-        <script>
-          PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");
-          PDFViewerApplication.page = 2;
-        </script>`,
+        <script>PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");</script>`,
       );
 
     const blob = new Blob([html], { type: "text/html" });
     iframe.src = URL.createObjectURL(blob);
-    iframe.contentWindow.PDFViewerApplication.page = 2;
+
     // show download link when loading error occurs
     iframe.addEventListener("load", () => {
       iframe.contentWindow?.addEventListener("unhandledrejection", () => {
@@ -119,12 +107,15 @@ function renderDownloadLink(fileSrc) {
   return wrapper;
 }
 
-export class EmbedPdf extends HTMLElement {
-  static viewerUrl = new URL("./vendor/pdfjs/web/viewer.html", import.meta.url)
-    .toString();
+class EmbedPdf extends HTMLElement {
+  static viewerUrl = new URL("web/viewer.html", import.meta.url).toString();
+
   static observedAttributes = ["src"];
+
   #shadowRoot;
+
   #isConnected = false;
+
   constructor() {
     super();
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
@@ -132,16 +123,19 @@ export class EmbedPdf extends HTMLElement {
     styleSheet.replace(style);
     this.#shadowRoot.adoptedStyleSheets = [styleSheet];
   }
+
   async connectedCallback() {
     this.#shadowRoot.replaceChildren(
-      await render({ src: this.getAttribute("src") }),
+      await render({ src: this.getAttribute("src") })
     );
     this.#isConnected = true;
   }
+
   disconnectedCallback() {
     this.#isConnected = false;
     this.#shadowRoot.replaceChildren();
   }
+
   /**
    * @param {string} name
    * @param {string | null} _oldValue
@@ -156,4 +150,7 @@ export class EmbedPdf extends HTMLElement {
     }
   }
 }
+
 customElements.define("embed-pdf", EmbedPdf);
+
+export { EmbedPdf };
