@@ -1,4 +1,6 @@
-class EmbedPdf1 extends HTMLElement {
+import { pdfjs } from "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/+esm";
+
+class EmbedPdf2 extends HTMLElement {
   static get observedAttributes() {
     return ["pdf"];
   }
@@ -45,9 +47,7 @@ class EmbedPdf1 extends HTMLElement {
   async setPdf(path) {
     await this.readyPromise;
 
-    const res = await fetch(path);
-    const pdf = await res.text();
-
+    const pdf = await pdfjs.getDocument(path).promise;
     const page = await pdf.getPage(1);
     const viewport = page.getViewport(1);
 
@@ -66,6 +66,6 @@ class EmbedPdf1 extends HTMLElement {
   }
 }
 
-customElements.define("embed-pdf1", EmbedPdf1);
+customElements.define("embed-pdf2", EmbedPdf2);
 
-export { EmbedPdf1 };
+export { EmbedPdf2 };
