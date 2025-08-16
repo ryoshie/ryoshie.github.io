@@ -1,4 +1,5 @@
 <html>
+  <script src="mod.js" type="module"></script>
   <style>
     :host {
       display: block;
@@ -8,10 +9,10 @@
     }
   </style>
   <body>
-    <script src="mod.js" type="module"></script>
+    test 2
+  </body>
     <script type="module">
-      Object.defineProperty(globalThis.navigator, "pdfViewerEnabled", { value: false });
       document.body.insertAdjacentHTML("beforeend", '<embed-pdf src="files/rejob_mediaguide_a.pdf"></embed-pdf>');
     </script>
-  </body>
+  
 </html>
