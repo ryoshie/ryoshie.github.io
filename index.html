@@ -1,6 +1,8 @@
 <html>
   <script src="mod.js" type="module"></script>
   <body>
-    <embed-pdf src="files/rejob_mediaguide_a.pdf"></embed-pdf>
+    <script type="module">
+      document.body.innerHTML(`<embed-pdf src="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf>`);
+    </script>
   </body>
 </html>
