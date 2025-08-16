@@ -1,5 +1,3 @@
-import { pdfjs } from "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/+esm";
-
 class EmbedPdf2 extends HTMLElement {
   static get observedAttributes() {
     return ["pdf"];
@@ -46,10 +44,40 @@ class EmbedPdf2 extends HTMLElement {
 
   async setPdf(path) {
     await this.readyPromise;
-
-    const pdf = await pdfjs.getDocument(path).promise;
-    const page = await pdf.getPage(1);
-    const viewport = page.getViewport(1);
+    const { pdfjsLib } = globalThis;
+    if (!pdfjsLib) {
+      throw new Error("PDF.js library is not loaded.");
+    }
+    if (!path) {
+      throw new Error("No PDF path provided.");
+    }
+    // Load the PDF document.
+    const pdfjs = pdfjsLib.getDocument({ url: path });
+    if (!pdfjs) {
+      throw new Error(`Failed to load PDF document from path: ${path}`);
+    }
+    // Wait for the PDF document to be loaded.
+    const { pdfDocument } = await pdfjs.promise;
+    if (!pdfDocument) {
+      throw new Error(`Failed to load PDF document from path: ${path}`);
+    }
+    // Get the first page of the PDF document.
+    if (!pdfDocument.getPage) {
+      throw new Error(`PDF document does not have a getPage method: ${path}`);
+    }
+    const pdfPage = await pdfDocument.getPage(1);
+    if (!pdfPage) {
+      throw new Error(`
+        Failed to get the first page of the PDF document: ${path}
+      `);
+    }
+    // Get the viewport for the first page.
+    const viewport = pdfPage.getViewport({ scale: 1 });
+    if (!viewport) {
+      throw new Error(`
+        Failed to get viewport for the first page of the PDF document: ${path}
+      `);
+    }
 
     // We can simply query for the single `<canvas>` in our shadow DOM!
     const canvas = this.shadowRoot.querySelector("canvas");
@@ -62,7 +90,7 @@ class EmbedPdf2 extends HTMLElement {
       viewport,
     };
 
-    page.render(renderCtx);
+    pdfPage.render(renderCtx);
   }
 }
 
