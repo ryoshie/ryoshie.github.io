@@ -4,8 +4,9 @@
   <script src="mod1.js" type="module"></script>
   <body>
     <script type="module">
-      // <embed-pdf src="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf>
+
       document.body.innerHTML = `
+      <embed-pdf src="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf>
       <embed-pdf2 pdf="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf2>
       `;
     </script>
