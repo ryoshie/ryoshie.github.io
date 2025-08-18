@@ -116,7 +116,7 @@ function renderDownloadLink(fileSrc) {
 }
 
 class EmbedPdf extends HTMLElement {
-  static viewerUrl = new URL("web/viewer.html", import.meta.url).toString();
+  static viewerUrl = new URL("https://mozilla.github.io/pdf.js/web/viewer.html", import.meta.url).toString();
 
   static observedAttributes = ["src"];
 
