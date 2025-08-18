@@ -36,37 +36,33 @@ iframe {
 }
 `;
 
-/** @type {Record<string, Promise<string>>} */
-const viewerHtmlCache = {};
+const body = document.body;
+body.style.width = "100vw";
+body.style.height = "100vh";
+body.style.margin = "0";
+body.style.padding = "0";
+body.style.overflow = "hidden";
 
 /** @param {{ src: string | null }} options */
 async function render({ src: fileSrc }) {
   const iframe = document.createElement("iframe");
-
-  if (!fileSrc) {
-    throw new Error("plese set `src` attribute to <embed-pdf> element.");
-  }
-
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.allowFullscreen = true;
   try {
     const fileUrl = new URL(fileSrc, location.href);
-
-    // cache pdfjs content
-    viewerHtmlCache[EmbedPdf.viewerUrl] ??= (async () => {
-      const res = await fetch(EmbedPdf.viewerUrl);
-      return res.text();
-    })();
-    const text = await viewerHtmlCache[EmbedPdf.viewerUrl];
+    const text = (await fetch(EmbedPdf.viewerUrl)).text();
 
     // inject script tag
     const html = text
       .replace(
         '<meta charset="utf-8">',
-        `<meta charset="utf-8"><base href="${EmbedPdf.viewerUrl}">`,
+        `<meta charset="utf-8"><base href="${EmbedPdf.viewerUrl}">`
       )
       .replace(
         '<script src="viewer.js"></script>',
         `<script src="viewer.js"></script>
-        <script>PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");</script>`,
+        <script>PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");</script>`
       );
 
     const blob = new Blob([html], { type: "text/html" });
@@ -95,14 +91,17 @@ function renderDownloadLink(fileSrc) {
   const downloadLink = document.createElement("a");
   downloadLink.href = fileSrc;
   downloadLink.target = "_brank";
-  downloadLink.textContent = "Download PDF ";
+  downloadLink.textContent = "Download PDF";
   wrapper.append(downloadLink);
   wrapper.classList.add("download-link");
   return wrapper;
 }
 
 class EmbedPdf extends HTMLElement {
-  static viewerUrl = new URL("web/viewer.html", import.meta.url).toString();
+  static viewerUrl = new URL(
+    "https://mozilla.github.io/pdf.js/web/viewer.html",
+    import.meta.url + document.location.hash
+  ).toString();
 
   static observedAttributes = ["src"];
 

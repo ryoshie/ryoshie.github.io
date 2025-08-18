@@ -1,14 +1,6 @@
 <html>
-  <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
   <script src="mod.js" type="module"></script>
-  <script src="mod1.js" type="module"></script>
-  <body>
-    <script type="module">
-
-      document.body.innerHTML = `
-      <embed-pdf src="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf>
-      <embed-pdf2 pdf="files/rejob_mediaguide_a.pdf${document.location.hash}"></embed-pdf2>
-      `;
-    </script>
+  <body style="margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;">
+    <embed-pdf src="files/rejob_mediaguide_a.pdf"></embed-pdf>
   </body>
 </html>
