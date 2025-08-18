@@ -46,15 +46,30 @@ body.style.margin = "0";
 body.style.padding = "0";
 body.style.overflow = "hidden";
 
+/** @type {Record<string, Promise<string>>} */
+const viewerHtmlCache = {};
+
 /** @param {{ src: string | null }} options */
 async function render({ src: fileSrc }) {
   const iframe = document.createElement("iframe");
   iframe.style.width = "100%";
   iframe.style.height = "100%";
   iframe.allowFullscreen = true;
+
+  if (!fileSrc) {
+    throw new Error("plese set `src` attribute to <embed-pdf> element.");
+  }
+
   try {
     const fileUrl = new URL(fileSrc, location.href);
-    const text = (await fetch(EmbedPdf.viewerUrl)).text();
+    console.log("EmbedPdf: fileUrl", fileUrl);
+
+    // cache pdfjs content
+    viewerHtmlCache[EmbedPdf.viewerUrl] ??= (async () => {
+      const res = await fetch(EmbedPdf.viewerUrl);
+      return res.text();
+    })();
+    const text = await viewerHtmlCache[EmbedPdf.viewerUrl];
 
     // inject script tag
     const html = text
