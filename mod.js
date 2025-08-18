@@ -34,6 +34,9 @@ iframe {
   mergin: 0.2em;
   filter: brightness(2);
 }
+#editorModeButtons, #editorModeSeparator {
+  display: none;
+}
 `;
 
 const body = document.body;
