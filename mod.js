@@ -118,7 +118,7 @@ function renderDownloadLink(fileSrc) {
 class EmbedPdf extends HTMLElement {
   static viewerUrl = new URL(
     "https://mozilla.github.io/pdf.js/web/viewer.html",
-    import.meta.url + document.location.hash
+    import.meta.url
   ).toString();
 
   static observedAttributes = ["src"];
@@ -132,6 +132,7 @@ class EmbedPdf extends HTMLElement {
     this.#shadowRoot = this.attachShadow({ mode: "closed" });
     const styleSheet = new CSSStyleSheet();
     styleSheet.replace(style);
+    console.log("EmbedPdf: viewerUrl", EmbedPdf.viewerUrl);
     this.#shadowRoot.adoptedStyleSheets = [styleSheet];
   }
 
