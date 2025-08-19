@@ -82,7 +82,7 @@ async function render({ src: fileSrc }) {
         `<script src="viewer.js"></script>
         <script>PDFViewerApplicationOptions.set("defaultUrl", "${fileUrl}");</script>`
       );
-
+      console.log("EmbedPdf: html", html);
     const blob = new Blob([html], { type: "text/html" });
     iframe.src = URL.createObjectURL(blob);
 

@@ -50,7 +50,11 @@ See https://github.com/adobe-type-tools/cmap-resources
 <!--<script src="viewer.mjs" type="module"></script>-->
 <!--#elif /* Development mode. */-->
     <link rel="resource" type="application/l10n" href="locale/locale.json">
-
+    <style>
+      #editorModeButtons, #editorModeSeparator {
+        display: none;
+      }
+    </style>
     <script type="importmap">
       {
         "imports": {
