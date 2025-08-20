@@ -28,13 +28,13 @@
     iframe.allowfullscreen = true;
     iframe.src = "https://ryoshie.github.io/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf" + (document.location.hash ?? "");
     document.body.appendChild(iframe);
-    window.addEventListener("load", () => {
+    iframe.onload = () => {
       setTimeout(() => {
-        if (document.readyState !== "complete") {
-          window.stop(); // Safariで下のバーを消すトリガー
-        }
-      }, 1500);
-    });
+          if (document.readyState !== "complete") {
+            window.stop(); // Safariで下のバーを消すトリガー
+          }
+        }, 10000);
+    };
   </script>
 </body>
 </html>
