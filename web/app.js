@@ -100,7 +100,7 @@ import { ViewHistory } from "./view_history.js";
 const FORCE_PAGES_LOADED_TIMEOUT = 10000; // ms
 
 const PDF_URL =
-  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a/rejob_mediaguide_a.pdf";
+  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_b/rejob_mediaguide_a.pdf";
 
 const ViewOnLoad = {
   UNKNOWN: -1,

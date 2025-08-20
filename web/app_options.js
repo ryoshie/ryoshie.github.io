@@ -528,7 +528,7 @@ const defaultOptions = {
   },
 };
 const PDF_URL =
-  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a/rejob_mediaguide_a.pdf";
+  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_b/rejob_mediaguide_a.pdf";
 if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
   defaultOptions.defaultUrl = {
     /** @type {string} */
