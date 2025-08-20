@@ -24,9 +24,15 @@
 </style>
 <body>
   <script>
+    const host = "https://ryoshie.github.io/web/viewer.html";
+    const pdfURL = "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.pdf";
+
+    // URLのハッシュを取得
+    const hash = document.location.hash ? document.location.hash : "";
+    const url = host + "?file=" + encodeURIComponent(pdfURL) + hash;
     const iframe = document.createElement("iframe");
     iframe.allowfullscreen = true;
-    iframe.src = "https://ryoshie.github.io/web/viewer.html?file=https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.pdf" + (document.location.hash ?? "");
+    iframe.src = url
     iframe.onload = () => {
       if (document.readyState !== "complete") {
         window.stop(); // Safariで下のバーを消すトリガー
