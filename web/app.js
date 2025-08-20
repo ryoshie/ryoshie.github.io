@@ -99,9 +99,6 @@ import { ViewHistory } from "./view_history.js";
 
 const FORCE_PAGES_LOADED_TIMEOUT = 10000; // ms
 
-const PDF_URL =
-  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_b/rejob_mediaguide_a.pdf";
-
 const ViewOnLoad = {
   UNKNOWN: -1,
   PREVIOUS: 0, // Default value.
@@ -740,10 +737,9 @@ const PDFViewerApplication = {
     const { appConfig, eventBus } = this;
     let file;
     if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
-      //const queryString = document.location.search.substring(1);
-      //const params = parseQueryString(queryString);
-      console.log(PDF_URL);
-      file = PDF_URL;
+      const queryString = document.location.search.substring(1);
+      const params = parseQueryString(queryString);
+      file = params.get("file") ?? AppOptions.get("defaultUrl");
       try {
         file = new URL(decodeURIComponent(file)).href;
       } catch {
@@ -2370,27 +2366,21 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     "null",
     "http://mozilla.github.io",
     "https://mozilla.github.io",
-    "http://ryoshie.github.io",
-    "https://ryoshie.github.io",
   ]);
   // eslint-disable-next-line no-var
   var validateFileURL = function (file) {
-    console.log(HOSTED_VIEWER_ORIGINS, file);
     if (!file) {
       return;
     }
     const viewerOrigin = URL.parse(window.location)?.origin || "null";
-    console.log(HOSTED_VIEWER_ORIGINS, viewerOrigin, file);
     if (HOSTED_VIEWER_ORIGINS.has(viewerOrigin)) {
       // Hosted or local viewer, allow for any file locations
       return;
     }
-    console.log(HOSTED_VIEWER_ORIGINS, viewerOrigin, file);
     const fileOrigin = URL.parse(file, window.location)?.origin;
     if (fileOrigin === viewerOrigin) {
       return;
     }
-    console.log(fileOrigin, viewerOrigin, file);
     const ex = new Error("file origin does not match viewer's");
 
     PDFViewerApplication._documentError("pdfjs-loading-error", {

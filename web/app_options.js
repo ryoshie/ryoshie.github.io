@@ -527,13 +527,13 @@ const defaultOptions = {
     kind: OptionKind.WORKER,
   },
 };
-const PDF_URL =
-  "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_b/rejob_mediaguide_a.pdf";
 if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
   defaultOptions.defaultUrl = {
     /** @type {string} */
     value:
-      typeof PDFJSDev !== "undefined" && PDFJSDev.test("CHROME") ? "" : PDF_URL, // rejob
+      typeof PDFJSDev !== "undefined" && PDFJSDev.test("CHROME")
+        ? ""
+        : "compressed.tracemonkey-pldi-09.pdf",
     kind: OptionKind.VIEWER,
   };
   defaultOptions.sandboxBundleSrc = {
