@@ -1,4 +1,5 @@
 const vendorUrl = "https://ryoshie.github.io/web/viewer.html";
+console.log(document.body.dataset);
 const pdfUrl = document.body.dataset.pdfUrl;
 const title = document.body.dataset.pdfTitle || "PDF Viewer";
 // URLのハッシュを取得
