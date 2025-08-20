@@ -1,6 +1,6 @@
 const vendorUrl = "https://ryoshie.github.io/web/viewer.html";
 const pdfUrl = document.body.dataset.pdfUrl;
-const title = document.body.dataset.title || "PDF Viewer";
+const title = document.body.dataset.pdfTitle || "PDF Viewer";
 // URLのハッシュを取得
 const hash = document.location.hash || "";
 const iframe = document.createElement("iframe");
