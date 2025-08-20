@@ -29,11 +29,17 @@
     iframe.src = "https://ryoshie.github.io/web/viewer.html?file=https://ryoshie.github.io/files/rejob_mediaguide_a.pdf" + (document.location.hash ?? "");
     document.body.appendChild(iframe);
     iframe.onload = () => {
-      setTimeout(() => {
-          if (document.readyState !== "complete") {
-            window.stop(); // Safariで下のバーを消すトリガー
-          }
-        }, 10000);
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      if (iframeDoc) {
+        const iframeTitle = iframeDoc.title;
+        if (iframeTitle) {
+          document.title = iframeTitle; // 親ページのタイトルを更新
+          console.log("タイトルを更新:", iframeTitle);
+        }
+      }
+      if (document.readyState !== "complete") {
+        window.stop(); // Safariで下のバーを消すトリガー
+      }
     };
   </script>
 </body>
