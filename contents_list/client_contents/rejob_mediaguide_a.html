@@ -2,43 +2,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<!--#if GENERIC || CHROME-->
     <meta name="google" content="notranslate">
-<!--#endif-->
-    <title>PDF View</title>
+    <title>PDF Viewer</title>
   </head>
-  <style>
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      height: 100dvh; /* 新しいSafariではこちらが優先される */
-      overflow: auto;
-    }
-</style>
-<body>
-  <script>
-    const host = "https://ryoshie.github.io/web/viewer.html";
-    const pdfURL = "https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.pdf";
-
-    // URLのハッシュを取得
-    const hash = document.location.hash ? document.location.hash : "";
-    const url = host + "?file=" + encodeURIComponent(pdfURL) + hash;
-    const iframe = document.createElement("iframe");
-    iframe.allowfullscreen = true;
-    iframe.src = url
-    iframe.onload = () => {
-      if (document.readyState !== "complete") {
-        window.stop(); // Safariで下のバーを消すトリガー
-      }
-    };
-    document.body.appendChild(iframe);
-  </script>
+  <script src="https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.js"></script>
+  <style src="https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.css"></style>
+<body data-pdf-url="https://ryoshie.github.io/contents_list/client_contents/rejob_mediaguide_a.pdf" 
+      data-pdf-title="Rejob Media Guide A">
 </body>
 </html>
